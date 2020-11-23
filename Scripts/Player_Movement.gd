@@ -1,8 +1,5 @@
 extends KinematicBody2D
 
-export var max_health = 1000
-var current_health = 1000
-
 var speed = 100
 export var slow_speed = 75
 export var fast_speed = 150
@@ -11,13 +8,48 @@ var velocity = Vector2()
 var bullet_speed = 2000
 var bullet = preload("res://Scenes/Bullet.tscn")
 
+signal collision(body)
+
 func _physics_process(delta):
 	move(delta)
 	
 	if GameEvents.current_weapon != "Empty_Hand":
 		speed = slow_speed
 		if Input.is_action_pressed("Shoot_A"):
-			shoot("A")
+			if Input.is_action_pressed("Sharp_Note"):
+				shoot("A#")
+			else:
+				shoot("A")
+		if Input.is_action_pressed("Shoot_B"):
+			if Input.is_action_pressed("Sharp_Note"):
+				shoot("B#")
+			else:
+				shoot("B")		
+		if Input.is_action_pressed("Shoot_C"):
+			if Input.is_action_pressed("Sharp_Note"):
+				shoot("C#")
+			else:
+				shoot("C")			
+		if Input.is_action_pressed("Shoot_D"):
+			if Input.is_action_pressed("Sharp_Note"):
+				shoot("D#")
+			else:
+				shoot("D")	
+		if Input.is_action_pressed("Shoot_E"):
+			if Input.is_action_pressed("Sharp_Note"):
+				shoot("E#")
+			else:
+				shoot("E")	
+		if Input.is_action_pressed("Shoot_F"):
+			if Input.is_action_pressed("Sharp_Note"):
+				shoot("F#")
+			else:
+				shoot("F")
+		if Input.is_action_pressed("Shoot_G"):
+			if Input.is_action_pressed("Sharp_Note"):
+				shoot("G#")
+			else:
+				shoot("G")
 	else:
 		speed = fast_speed
 
@@ -36,8 +68,18 @@ func move(delta):
 	move_and_slide(velocity*speed)	
 
 func shoot(note):
+	#check bullet count
 	if GameEvents.bullet_count > GameEvents.max_bullet_count:
 		return
+		
+	#check if note exists
+	var can_go = false
+	for i in range(0, GameEvents.notes_unlocked.size()):
+		if GameEvents.notes_unlocked[i] == note[0]:
+			can_go = true
+	if !can_go:
+		return
+		
 	var bullet_instance = bullet.instance()
 	GameEvents.bullet_count += 1
 	bullet_instance.bullet_note = note
@@ -51,3 +93,6 @@ func shoot(note):
 
 func died():
 	get_tree().reload_current_scene()
+
+func _on_Area2D_area_entered(area):
+	emit_signal("collision", area)

@@ -10,10 +10,10 @@ var parchments_unlocked = []
 var bullet_count = 0
 var max_bullet_count = 5
 
+var win = false
+
 func _ready():
 	weapons_unlocked.append(current_weapon)
-	weapons_unlocked.append("Guitar")
-	print(current_weapon)
 	
 func _process(delta):
 	if Input.is_action_just_pressed("Change_Weapon"):

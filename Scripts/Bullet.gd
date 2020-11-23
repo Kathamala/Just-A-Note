@@ -4,7 +4,6 @@ var bullet_note = ""
 
 func _ready():
 	$Timer.start()
-	pass
 	
 func _process(delta):
 	if(!$VisibilityNotifier2D.is_on_screen()):
