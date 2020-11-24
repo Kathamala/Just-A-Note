@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tilesets/tileset carpete 128px.png" type="Texture" id=2]
@@ -20,8 +20,7 @@
 [ext_resource path="res://Sprites/etc/spotlight.jpg" type="Texture" id=18]
 [ext_resource path="res://Sprites/etc/Base_Sprite.png" type="Texture" id=19]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=20]
-[ext_resource path="res://Scenes/Health/Health_Bar.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Scenes/Health/Health.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Health_Bar.tscn" type="PackedScene" id=21]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tileset madeira 128px 2.png 0"
@@ -1377,10 +1376,10 @@ points = PoolVector2Array( 128, 128, 0, 128, 0, 96, 128, 96 )
 } ]
 9/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=65]
+[sub_resource type="RectangleShape2D" id=64]
 extents = Vector2( 37.7693, 33.9541 )
 
-[sub_resource type="CircleShape2D" id=64]
+[sub_resource type="CircleShape2D" id=65]
 radius = 41.4949
 
 [node name="Game" type="Node2D"]
@@ -1389,21 +1388,18 @@ __meta__ = {
 "_edit_horizontal_guides_": [ -886.174, 6654.39, -1199.77, -881.843 ]
 }
 
-[node name="HUD" type="Node2D" parent="."]
-z_index = 2
+[node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="ProgressBar" parent="HUD" instance=ExtResource( 21 )]
-margin_left = 54.8433
+margin_left = 55.8433
 margin_top = 55.0302
-margin_right = 566.843
+margin_right = 567.843
 margin_bottom = 119.03
-
-[node name="Health" parent="HUD" instance=ExtResource( 22 )]
 
 [node name="Player" parent="." groups=[
 "Player",
 ] instance=ExtResource( 1 )]
-position = Vector2( 334.923, 893.666 )
+position = Vector2( 364.626, 2553.16 )
 z_index = 1
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
@@ -1505,7 +1501,12 @@ tile_data = PoolIntArray( 2097260, 9, 0, 2228320, 6, 0, 2228326, 4, 0 )
 [node name="Enemys" type="Node" parent="."]
 
 [node name="Enemy" parent="Enemys" instance=ExtResource( 17 )]
-position = Vector2( 8042.21, 1807.85 )
+position = Vector2( 1202.15, 908.578 )
+enemy_note = "B"
+
+[node name="Enemy2" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 3397.32, 994.105 )
+enemy_note = "D#"
 
 [node name="Doors" type="Node" parent="."]
 
@@ -1535,7 +1536,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectables/Guitar"]
-shape = SubResource( 65 )
+shape = SubResource( 64 )
 
 [node name="Sprite" type="Sprite" parent="Collectables/Guitar"]
 scale = Vector2( 0.3, 0.3 )
@@ -1548,7 +1549,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectables/ScaleParchment_E"]
-shape = SubResource( 64 )
+shape = SubResource( 65 )
 
 [node name="Sprite" type="Sprite" parent="Collectables/ScaleParchment_E"]
 modulate = Color( 0.00784314, 0, 1, 1 )
@@ -1562,10 +1563,22 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectables/Note_A"]
-shape = SubResource( 64 )
+shape = SubResource( 65 )
 
 [node name="Sprite" type="Sprite" parent="Collectables/Note_A"]
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 19 )
-[connection signal="changed" from="HUD/Health" to="HUD/ProgressBar" method="set_value"]
-[connection signal="max_changed" from="HUD/Health" to="HUD/ProgressBar" method="set_max"]
+
+[node name="Note_C" type="Area2D" parent="Collectables"]
+modulate = Color( 0.666667, 0.447059, 0.101961, 1 )
+position = Vector2( 10702.6, 5448.78 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectables/Note_C"]
+shape = SubResource( 65 )
+
+[node name="Sprite" type="Sprite" parent="Collectables/Note_C"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
