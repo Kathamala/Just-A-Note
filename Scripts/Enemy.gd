@@ -8,6 +8,7 @@ var speed = 20
 var velocity = Vector2()
 
 var rng = 0
+var dead = false
 
 export var enemy_note = "A"
 
@@ -37,6 +38,6 @@ func _on_Hitbox_body_entered(body):
 			if GameEvents.E_Parchment[i] == body.bullet_note:
 				if GameEvents.E_Parchment[i+1] == enemy_note:
 					queue_free()
-		
+
 	if body.is_in_group("Bullet_Limit"):
-		velocity.x *= -1	
+		velocity.x *= -1

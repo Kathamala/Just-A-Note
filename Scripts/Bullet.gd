@@ -10,7 +10,7 @@ func _process(delta):
 		kill_bullet()
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("Bullet_Limit"):
+	if body.is_in_group("Bullet_Limit") or body.is_in_group("Enemy"):
 		kill_bullet()
 
 func _on_Timer_timeout():

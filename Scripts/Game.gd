@@ -35,3 +35,4 @@ func _on_Player_Collision(body):
 		
 	if body.is_in_group("Enemy"):
 		GameEvents.current -= 10
+

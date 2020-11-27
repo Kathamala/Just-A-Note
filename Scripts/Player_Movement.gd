@@ -15,37 +15,37 @@ func _physics_process(delta):
 	
 	if GameEvents.current_weapon != "Empty_Hand":
 		speed = slow_speed
-		if Input.is_action_pressed("Shoot_A"):
+		if Input.is_action_just_pressed("Shoot_A"):
 			if Input.is_action_pressed("Sharp_Note"):
 				shoot("A#")
 			else:
 				shoot("A")
-		if Input.is_action_pressed("Shoot_B"):
+		if Input.is_action_just_pressed("Shoot_B"):
 			if Input.is_action_pressed("Sharp_Note"):
 				shoot("B#")
 			else:
 				shoot("B")		
-		if Input.is_action_pressed("Shoot_C"):
+		if Input.is_action_just_pressed("Shoot_C"):
 			if Input.is_action_pressed("Sharp_Note"):
 				shoot("C#")
 			else:
 				shoot("C")			
-		if Input.is_action_pressed("Shoot_D"):
+		if Input.is_action_just_pressed("Shoot_D"):
 			if Input.is_action_pressed("Sharp_Note"):
 				shoot("D#")
 			else:
 				shoot("D")	
-		if Input.is_action_pressed("Shoot_E"):
+		if Input.is_action_just_pressed("Shoot_E"):
 			if Input.is_action_pressed("Sharp_Note"):
 				shoot("E#")
 			else:
 				shoot("E")	
-		if Input.is_action_pressed("Shoot_F"):
+		if Input.is_action_just_pressed("Shoot_F"):
 			if Input.is_action_pressed("Sharp_Note"):
 				shoot("F#")
 			else:
 				shoot("F")
-		if Input.is_action_pressed("Shoot_G"):
+		if Input.is_action_just_pressed("Shoot_G"):
 			if Input.is_action_pressed("Sharp_Note"):
 				shoot("G#")
 			else:
@@ -79,7 +79,9 @@ func shoot(note):
 			can_go = true
 	if !can_go:
 		return
-		
+	
+	play_audio(note)
+	
 	var bullet_instance = bullet.instance()
 	GameEvents.bullet_count += 1
 	bullet_instance.bullet_note = note
@@ -89,7 +91,18 @@ func shoot(note):
 	else:
 		bullet_instance.position -= Vector2(20, 0)
 		bullet_instance.apply_impulse(Vector2(), Vector2(-bullet_speed, 0))
+	
 	get_tree().get_root().call_deferred("add_child", bullet_instance)
+
+func play_audio(note):
+	if note == "A":
+		$A.play()
+	if note == "A#":
+		$AS.play()
+	if note == "C":
+		$C.play()
+	if note == "C#":
+		$CS.play()
 
 func _on_Area2D_area_entered(area):
 	emit_signal("collision", area)

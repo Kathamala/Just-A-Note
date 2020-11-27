@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/C_Sharp.wav-27945b51309d7b724ba89ba996f68cb1.sample"
+
+[deps]
+
+source_file="res://Audio/Note_Sounds/C_Sharp.wav"
+dest_files=[ "res://.import/C_Sharp.wav-27945b51309d7b724ba89ba996f68cb1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -19,6 +19,8 @@ var win = false
 
 func _ready():
 	weapons_unlocked.append(current_weapon)
+	notes_unlocked.append("A")
+	notes_unlocked.append("C")
 	
 func _process(delta):
 	if Input.is_action_just_pressed("Change_Weapon"):
@@ -28,7 +30,6 @@ func _process(delta):
 	
 	if current == 0:
 		get_tree().reload_current_scene()
-
 			
 func weapon_change():
 	for i in range(0, weapons_unlocked.size()):		

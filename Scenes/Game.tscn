@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tilesets/tileset carpete 128px.png" type="Texture" id=2]
@@ -21,6 +21,13 @@
 [ext_resource path="res://Sprites/etc/Base_Sprite.png" type="Texture" id=19]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=20]
 [ext_resource path="res://Scenes/Health_Bar.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Audio/Note_Sounds/A.wav" type="AudioStream" id=22]
+[ext_resource path="res://Audio/Note_Sounds/A_Sharp.wav" type="AudioStream" id=23]
+[ext_resource path="res://Audio/Note_Sounds/C.wav" type="AudioStream" id=24]
+[ext_resource path="res://Audio/Note_Sounds/C_Sharp.wav" type="AudioStream" id=25]
+[ext_resource path="res://Audio/Note_Sounds/B.wav" type="AudioStream" id=26]
+[ext_resource path="res://Audio/Note_Sounds/D_Sharp.wav" type="AudioStream" id=27]
+[ext_resource path="res://Scenes/SecretRoomDoor.tscn" type="PackedScene" id=28]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tileset madeira 128px 2.png 0"
@@ -1417,6 +1424,32 @@ editor_draw_drag_margin = true
 [node name="Light2D" type="Light2D" parent="Player"]
 texture = ExtResource( 18 )
 
+[node name="A" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 22 )
+volume_db = -25.0
+
+[node name="AS" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 23 )
+volume_db = -25.0
+
+[node name="B" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( 3.05176e-05, -0.00195313 )
+stream = ExtResource( 26 )
+volume_db = -25.0
+
+[node name="C" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 24 )
+volume_db = -25.0
+
+[node name="CS" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 25 )
+volume_db = -25.0
+
+[node name="DS" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( 0.00411987, -0.00488281 )
+stream = ExtResource( 27 )
+volume_db = -25.0
+
 [node name="Tilesets" type="Node" parent="."]
 
 [node name="Madeira" type="TileMap" parent="Tilesets"]
@@ -1510,20 +1543,32 @@ enemy_note = "D#"
 
 [node name="Doors" type="Node" parent="."]
 
-[node name="porta lateral 128px3" type="Sprite" parent="Doors"]
+[node name="porta1_corredor" type="Sprite" parent="Doors"]
 position = Vector2( 6005.28, 5084.64 )
 scale = Vector2( 1, 0.5 )
 texture = ExtResource( 10 )
 
-[node name="porta lateral 128px2" type="Sprite" parent="Doors"]
+[node name="porta2_corredor" type="Sprite" parent="Doors"]
 position = Vector2( 6005.28, 5473.28 )
 scale = Vector2( 1, 0.5 )
 texture = ExtResource( 10 )
 
-[node name="porta fechada" type="Sprite" parent="Doors"]
-position = Vector2( 9874.36, 3583.4 )
-scale = Vector2( 1, 4.02197 )
+[node name="porta1_salao" type="Sprite" parent="Doors"]
+position = Vector2( 9891, 3434.53 )
+scale = Vector2( 1, 0.5 )
 texture = ExtResource( 10 )
+
+[node name="porta2_salao" type="Sprite" parent="Doors"]
+position = Vector2( 9891, 3828.3 )
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 10 )
+
+[node name="SecretRoomDoor" parent="Doors" instance=ExtResource( 28 )]
+
+[node name="SecretRoomDoor2" parent="Doors" instance=ExtResource( 28 )]
+position = Vector2( 6591.38, 2369.24 )
+z_index = -1
+sequence = [ "C", "C", "C", "C", "C#" ]
 
 [node name="Collectables" type="Node" parent="."]
 
