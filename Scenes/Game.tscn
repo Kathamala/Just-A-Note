@@ -1406,7 +1406,7 @@ margin_bottom = 119.03
 [node name="Player" parent="." groups=[
 "Player",
 ] instance=ExtResource( 1 )]
-position = Vector2( 364.626, 2553.16 )
+position = Vector2( 509.486, 2539.19 )
 z_index = 1
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
@@ -1539,6 +1539,58 @@ enemy_note = "B"
 
 [node name="Enemy2" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 3397.32, 994.105 )
+enemy_note = "D#"
+
+[node name="Enemy3" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 3793.3, 2470.54 )
+enemy_note = "D#"
+
+[node name="Enemy15" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 1767.59, 4280.5 )
+enemy_note = "D#"
+
+[node name="Enemy4" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 3992.86, 5169.13 )
+enemy_note = "D#"
+
+[node name="Enemy5" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 4749.06, 5386.33 )
+enemy_note = "D#"
+
+[node name="Enemy6" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 7958.59, 5299.35 )
+enemy_note = "D#"
+
+[node name="Enemy7" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 10667.5, 5005.68 )
+enemy_note = "D#"
+
+[node name="Enemy8" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 7413.21, 3465.42 )
+enemy_note = "D#"
+
+[node name="Enemy9" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 6598.13, 4310.46 )
+enemy_note = "D#"
+
+[node name="Enemy10" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 1803.25, 362.298 )
+enemy_note = "D#"
+
+[node name="Enemy11" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 9307.07, 2794.18 )
+enemy_note = "D#"
+
+[node name="Enemy12" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 8575.9, 1757.35 )
+enemy_note = "D#"
+
+[node name="Enemy13" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 9456.9, 1193.99 )
+enemy_note = "D#"
+
+[node name="Enemy14" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 8222.3, 474.799 )
 enemy_note = "D#"
 
 [node name="Doors" type="Node" parent="."]

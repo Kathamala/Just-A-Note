@@ -25,6 +25,12 @@ func _physics_process(delta):
 				$Sprite.flip_h = false
 			elif Player.position.x - position.x < 0:
 				$Sprite.flip_h = true
+		else:
+			move_and_slide(velocity*speed)
+			if velocity.x > 0:
+				$Sprite.flip_h = false
+			elif velocity.x < 0:
+				$Sprite.flip_h = true
 	else:
 		move_and_slide(velocity*speed)
 		if velocity.x > 0:

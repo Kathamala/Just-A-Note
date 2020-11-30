@@ -8,9 +8,14 @@ var velocity = Vector2()
 var bullet_speed = 2000
 var bullet = preload("res://Scenes/Bullet.tscn")
 
+var knockback = Vector2.ZERO
+export var knockback_power = 0.25
+
 signal collision(body)
 
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
+	knockback = move_and_slide(knockback)
 	move(delta)
 	
 	if GameEvents.current_weapon != "Empty_Hand":
@@ -105,4 +110,10 @@ func play_audio(note):
 		$CS.play()
 
 func _on_Area2D_area_entered(area):
+	if area.is_in_group("Enemy"):
+		if area.get_parent().position.x > position.x:
+			knockback = (Vector2(area.position.x - position.x, area.position.y - position.y)) * knockback_power
+		elif area.get_parent().position.x < position.x:
+			knockback = -(Vector2(area.position.x - position.x, area.position.y - position.y)) * knockback_power
+			
 	emit_signal("collision", area)
