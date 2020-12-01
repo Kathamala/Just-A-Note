@@ -3,11 +3,13 @@ extends Node2D
 func _ready():
 	$Player.connect("collision", self, "_on_Player_Collision")
 	GameEvents.current = GameEvents.max_amount
+	$HUD/Label.visible = false
 
 func _on_Player_Collision(body):
 	if body.name == "Guitar":
 		GameEvents.weapons_unlocked.append("Guitar")
 		body.queue_free()
+		GameEvents.current_weapon = "Guitar"
 	if body.name == "ScaleParchment_E":
 		GameEvents.parchments_unlocked.append("E")
 		body.queue_free()
@@ -32,7 +34,12 @@ func _on_Player_Collision(body):
 	if body.name == "Note_G":
 		GameEvents.notes_unlocked.append("G")
 		body.queue_free()
-		
 	if body.is_in_group("Enemy"):
 		GameEvents.current -= 10
-
+	
+	if body.name == "CorridorLimitIn":
+		GameEvents.game_moment = 1
+		$HUD/Label.visible = true
+		$Player/MainCamera/Sprite/Timer.start()
+	if body.name == "CorridorLimitOut":
+		get_tree().change_scene("res://Scenes/Game_Over.tscn")

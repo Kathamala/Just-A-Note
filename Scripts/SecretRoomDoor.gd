@@ -4,6 +4,8 @@ export var sequence = ["A", "A#", "C", "C#"]
 export var time_between_notes = 1
 var notes_right = 0
 
+var open = false
+
 var player_in_area = false
 
 func _ready():
@@ -18,10 +20,21 @@ func _ready():
 	$ColorRect.rect_size.x = $ColorRect/GuideText.rect_size.x*2
 	$ColorRect.rect_size.y = dynamic_font.size*1.25
 	$ColorRect/GuideText.add_font_override("font", dynamic_font)
-	print(sequence)
 
 func _process(delta):
 	$Timer.wait_time = time_between_notes
+	
+	if open:
+		$Sprite.visible = false
+		$OpenSprite.visible = true
+		$CollisionShape2D.disabled = true
+	else:
+		$Sprite.visible = true
+		$OpenSprite.visible = false
+		$CollisionShape2D.disabled = false
+	
+	if GameEvents.game_moment == 1:
+		open = false
 	
 	if player_in_area and GameEvents.current_weapon != "Empty_Hand":
 		if Input.is_action_just_pressed("Shoot_A"):
@@ -86,4 +99,4 @@ func check_note_in_array(note):
 		notes_right += 1
 		
 	if notes_right == sequence.size():
-		queue_free()
+		open = true

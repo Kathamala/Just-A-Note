@@ -12,6 +12,8 @@ var dead = false
 
 export var enemy_note = "A"
 
+signal dead
+
 func _ready():
 	Player = get_parent().get_parent().get_node("Player")
 	velocity.x = 7
@@ -43,6 +45,7 @@ func _on_Hitbox_body_entered(body):
 		for i in range(0, 7):
 			if GameEvents.E_Parchment[i] == body.bullet_note:
 				if GameEvents.E_Parchment[i+1] == enemy_note:
+					emit_signal("dead")
 					queue_free()
 
 	if body.is_in_group("Bullet_Limit"):

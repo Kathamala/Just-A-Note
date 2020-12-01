@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=101 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tilesets/tileset carpete 128px.png" type="Texture" id=2]
@@ -28,6 +28,30 @@
 [ext_resource path="res://Audio/Note_Sounds/B.wav" type="AudioStream" id=26]
 [ext_resource path="res://Audio/Note_Sounds/D_Sharp.wav" type="AudioStream" id=27]
 [ext_resource path="res://Scenes/SecretRoomDoor.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Sprites/etc/Camera_Top.jpg" type="Texture" id=29]
+[ext_resource path="res://Scripts/CameraAnimation.gd" type="Script" id=30]
+[ext_resource path="res://Fonts/NerkoOne-Regular.ttf" type="DynamicFontData" id=31]
+[ext_resource path="res://Scenes/Tutorials.tscn" type="PackedScene" id=32]
+
+[sub_resource type="DynamicFont" id=68]
+size = 128
+font_data = ExtResource( 31 )
+
+[sub_resource type="Animation" id=66]
+resource_name = "CorridorWarning"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.254902 ), Color( 1, 0, 0, 0.254902 ), Color( 1, 1, 1, 0.254902 ) ]
+}
 
 [sub_resource type="TileSet" id=1]
 0/name = "tileset madeira 128px 2.png 0"
@@ -1389,6 +1413,9 @@ extents = Vector2( 37.7693, 33.9541 )
 [sub_resource type="CircleShape2D" id=65]
 radius = 41.4949
 
+[sub_resource type="RectangleShape2D" id=67]
+extents = Vector2( 731.952, 16.4114 )
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 20 )
 __meta__ = {
@@ -1396,6 +1423,27 @@ __meta__ = {
 }
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Tutorials" parent="HUD" instance=ExtResource( 32 )]
+margin_left = 1332.0
+margin_top = 19.0
+margin_right = 1890.0
+margin_bottom = 305.0
+
+[node name="Label" type="Label" parent="HUD"]
+anchor_right = 1.001
+anchor_bottom = 0.144
+margin_left = 2.0
+margin_right = -0.920044
+margin_bottom = 0.479996
+custom_fonts/font = SubResource( 68 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "TIME LEFT: 22"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ProgressBar" parent="HUD" instance=ExtResource( 21 )]
 margin_left = 55.8433
@@ -1406,8 +1454,10 @@ margin_bottom = 119.03
 [node name="Player" parent="." groups=[
 "Player",
 ] instance=ExtResource( 1 )]
-position = Vector2( 509.486, 2539.19 )
+position = Vector2( 546.053, 2455.74 )
 z_index = 1
+slow_speed = 50
+fast_speed = 100
 
 [node name="MainCamera" type="Camera2D" parent="Player"]
 current = true
@@ -1420,6 +1470,22 @@ drag_margin_top = 0.1
 drag_margin_right = 0.1
 drag_margin_bottom = 0.1
 editor_draw_drag_margin = true
+script = ExtResource( 30 )
+
+[node name="Sprite" type="Sprite" parent="Player/MainCamera"]
+visible = false
+modulate = Color( 1, 1, 1, 0.254902 )
+position = Vector2( 184.496, -59.238 )
+scale = Vector2( 3.59435, 2.36173 )
+z_index = 2
+texture = ExtResource( 29 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/MainCamera/Sprite"]
+anims/CorridorWarning = SubResource( 66 )
+
+[node name="Timer" type="Timer" parent="Player/MainCamera/Sprite"]
+wait_time = 30.0
+one_shot = true
 
 [node name="Light2D" type="Light2D" parent="Player"]
 texture = ExtResource( 18 )
@@ -1534,7 +1600,7 @@ tile_data = PoolIntArray( 2097260, 9, 0, 2228320, 6, 0, 2228326, 4, 0 )
 [node name="Enemys" type="Node" parent="."]
 
 [node name="Enemy" parent="Enemys" instance=ExtResource( 17 )]
-position = Vector2( 1202.15, 908.578 )
+position = Vector2( 1208.14, 872.619 )
 enemy_note = "B"
 
 [node name="Enemy2" parent="Enemys" instance=ExtResource( 17 )]
@@ -1543,7 +1609,7 @@ enemy_note = "D#"
 
 [node name="Enemy3" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 3793.3, 2470.54 )
-enemy_note = "D#"
+enemy_note = "B"
 
 [node name="Enemy15" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 1767.59, 4280.5 )
@@ -1551,19 +1617,19 @@ enemy_note = "D#"
 
 [node name="Enemy4" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 3992.86, 5169.13 )
-enemy_note = "D#"
+enemy_note = "B"
 
 [node name="Enemy5" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 4749.06, 5386.33 )
 enemy_note = "D#"
 
 [node name="Enemy6" parent="Enemys" instance=ExtResource( 17 )]
-position = Vector2( 7958.59, 5299.35 )
+position = Vector2( 7903.15, 5178.4 )
 enemy_note = "D#"
 
 [node name="Enemy7" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 10667.5, 5005.68 )
-enemy_note = "D#"
+enemy_note = "B"
 
 [node name="Enemy8" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 7413.21, 3465.42 )
@@ -1574,8 +1640,8 @@ position = Vector2( 6598.13, 4310.46 )
 enemy_note = "D#"
 
 [node name="Enemy10" parent="Enemys" instance=ExtResource( 17 )]
-position = Vector2( 1803.25, 362.298 )
-enemy_note = "D#"
+position = Vector2( 2913.23, 358.934 )
+enemy_note = "B"
 
 [node name="Enemy11" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 9307.07, 2794.18 )
@@ -1583,7 +1649,7 @@ enemy_note = "D#"
 
 [node name="Enemy12" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 8575.9, 1757.35 )
-enemy_note = "D#"
+enemy_note = "B"
 
 [node name="Enemy13" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 9456.9, 1193.99 )
@@ -1616,10 +1682,11 @@ scale = Vector2( 1, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="SecretRoomDoor" parent="Doors" instance=ExtResource( 28 )]
+sequence = [ "C", "A#", "C", "C#" ]
 
 [node name="SecretRoomDoor2" parent="Doors" instance=ExtResource( 28 )]
-position = Vector2( 6591.38, 2369.24 )
-z_index = -1
+position = Vector2( 6591.38, 2368.24 )
+z_index = 1
 sequence = [ "C", "C", "C", "C", "C#" ]
 
 [node name="Collectables" type="Node" parent="."]
@@ -1679,3 +1746,21 @@ shape = SubResource( 65 )
 [node name="Sprite" type="Sprite" parent="Collectables/Note_C"]
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 19 )
+
+[node name="CorridorLimitIn" type="Area2D" parent="."]
+position = Vector2( 6216.24, 1256.41 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CorridorLimitIn"]
+shape = SubResource( 67 )
+
+[node name="CorridorLimitOut" type="Area2D" parent="."]
+position = Vector2( 10625.2, -74.6581 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CorridorLimitOut"]
+shape = SubResource( 67 )

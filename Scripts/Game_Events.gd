@@ -17,10 +17,11 @@ var max_bullet_count = 5
 
 var win = false
 
+var game_moment = 0
+
 func _ready():
+	game_moment = 0
 	weapons_unlocked.append(current_weapon)
-	notes_unlocked.append("A")
-	notes_unlocked.append("C")
 	
 func _process(delta):
 	if Input.is_action_just_pressed("Change_Weapon"):
