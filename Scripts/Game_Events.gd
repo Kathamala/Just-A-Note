@@ -9,6 +9,7 @@ var current_weapon = "Empty_Hand"
 var notes_unlocked = []
 var weapons_unlocked = []
 var parchments_unlocked = []
+var collectables_unlocked = []
 
 var E_Parchment = ["E", "F#", "G#", "A", "B", "C#", "D#"]
 
@@ -22,6 +23,13 @@ var game_moment = 0
 func _ready():
 	game_moment = 0
 	weapons_unlocked.append(current_weapon)
+	
+	#unlock everything
+	#notes_unlocked.append("A")
+	#notes_unlocked.append("C")
+	#parchments_unlocked.append("E")
+	#weapons_unlocked.append("Guitar")
+	
 	
 func _process(delta):
 	if Input.is_action_just_pressed("Change_Weapon"):

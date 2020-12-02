@@ -3,8 +3,9 @@
 [ext_resource path="res://Sprites/Player/minduim idle.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player_Movement.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 41.1853, 70.0674 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 36.2151
+height = 52.2275
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 37.0186

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Buzz.wav-2e16e08e3243ee20327cc443020fd05b.sample"
+
+[deps]
+
+source_file="res://Audio/Sound_Effects/Buzz.wav"
+dest_files=[ "res://.import/Buzz.wav-2e16e08e3243ee20327cc443020fd05b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

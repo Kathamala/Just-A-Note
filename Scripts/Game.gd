@@ -34,12 +34,18 @@ func _on_Player_Collision(body):
 	if body.name == "Note_G":
 		GameEvents.notes_unlocked.append("G")
 		body.queue_free()
+	if body.name == "Green_Guitar_Pick":
+		GameEvents.collectables_unlocked.append(body.name)
+		body.queue_free()		
 	if body.is_in_group("Enemy"):
 		GameEvents.current -= 10
-	
+		body.get_parent().knockback()
 	if body.name == "CorridorLimitIn":
 		GameEvents.game_moment = 1
 		$HUD/Label.visible = true
 		$Player/MainCamera/Sprite/Timer.start()
 	if body.name == "CorridorLimitOut":
 		get_tree().change_scene("res://Scenes/Game_Over.tscn")
+
+func _on_MinduimJam_finished():
+	$Player/MinduimJam.play()

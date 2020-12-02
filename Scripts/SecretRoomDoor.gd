@@ -8,7 +8,11 @@ var open = false
 
 var player_in_area = false
 
+signal player_in_area
+
 func _ready():
+	$Timer.wait_time = time_between_notes
+	
 	$ColorRect/GuideText.text = "| "
 	for i in range(sequence.size()):
 		$ColorRect/GuideText.text += sequence[i] + " | "
@@ -22,15 +26,20 @@ func _ready():
 	$ColorRect/GuideText.add_font_override("font", dynamic_font)
 
 func _process(delta):
-	$Timer.wait_time = time_between_notes
-	
 	if open:
 		$Sprite.visible = false
 		$OpenSprite.visible = true
 		$CollisionShape2D.disabled = true
+		$LeftSide.disabled = false
+		$RightSide.disabled = false
+		$CollisionShape2D.disabled = true
+		$ColorRect.visible = false
 	else:
 		$Sprite.visible = true
 		$OpenSprite.visible = false
+		$CollisionShape2D.disabled = false
+		$LeftSide.disabled = true
+		$RightSide.disabled = true
 		$CollisionShape2D.disabled = false
 	
 	if GameEvents.game_moment == 1:
@@ -75,13 +84,18 @@ func _process(delta):
 
 func _on_Play_Area_body_entered(body):
 	if "Player" in body.name:
-		$ColorRect.modulate.a = 0.5
+		emit_signal("player_in_area")
+		if !open:
+			$ColorRect.modulate.a = 0.5
 		player_in_area = true
 		
 func _on_Play_Area_body_exited(body):
 	if "Player" in body.name:
 		$ColorRect.modulate.a = 0
 		player_in_area = false
+
+
+var chars_changes = 0
 
 func check_note_in_array(note):
 	var note_existst = false
@@ -95,8 +109,44 @@ func check_note_in_array(note):
 		return
 	
 	if sequence[notes_right] == note:
-		print("Yes: ", note)
+		$Timer.start()
 		notes_right += 1
 		
+		var word = $ColorRect/GuideText.text
+		var already_changed = false
+		var just_changed = false
+		$ColorRect/GuideText.text = ""
+		for i in range(word.length()):
+			if word[i] == note[0] and !already_changed and i > chars_changes*4:
+				$ColorRect/GuideText.push_color(Color.blue)
+				chars_changes += 1
+				already_changed = true
+				just_changed = true
+				
+			else:
+				$ColorRect/GuideText.push_color(Color.yellow)
+				
+				if word[i] == "#" and just_changed:
+					$ColorRect/GuideText.push_color(Color.blue)
+				just_changed = false
+				
+			$ColorRect/GuideText.add_text(word[i])
+
 	if notes_right == sequence.size():
+		if !open:
+			$DoorUnlocked.play()
 		open = true
+
+func _on_Timer_timeout():
+	#reset
+	if notes_right > 0:
+		notes_right = 0
+		if !open:
+			$Buzz.play()
+	
+		chars_changes = 0
+		var word = $ColorRect/GuideText.text
+		$ColorRect/GuideText.text = ""
+		$ColorRect/GuideText.push_color(Color.yellow)
+		for i in range(word.length()):
+			$ColorRect/GuideText.add_text(word[i])	

@@ -14,7 +14,10 @@ export var enemy_note = "A"
 
 signal dead
 
+var knockback_force = 150
+
 func _ready():
+	$ColorRect/Label.text = enemy_note
 	Player = get_parent().get_parent().get_node("Player")
 	velocity.x = 7
 	
@@ -23,9 +26,13 @@ func _physics_process(delta):
 		if (abs(Player.position.y - position.y) < sight_distance):
 			position += (Player.position - position)/100
 			move_and_collide(motion)
-			if Player.position.x - position.x > 0:
+			if Player.position.x > position.x:
+				velocity.x = abs(velocity.x)
+				velocity.y = abs(velocity.y)
 				$Sprite.flip_h = false
-			elif Player.position.x - position.x < 0:
+			elif Player.position.x < position.x:
+				velocity.x = abs(velocity.x)*-1
+				velocity.y = abs(velocity.y)*-1
 				$Sprite.flip_h = true
 		else:
 			move_and_slide(velocity*speed)
@@ -50,3 +57,6 @@ func _on_Hitbox_body_entered(body):
 
 	if body.is_in_group("Bullet_Limit"):
 		velocity.x *= -1
+
+func knockback():
+	move_and_slide(-velocity*speed*knockback_force)
