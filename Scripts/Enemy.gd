@@ -21,10 +21,11 @@ func _ready():
 	Player = get_parent().get_parent().get_node("Player")
 	velocity.x = 7
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if	(abs(Player.position.x - position.x) < sight_distance):
 		if (abs(Player.position.y - position.y) < sight_distance):
 			position += (Player.position - position)/100
+# warning-ignore:return_value_discarded
 			move_and_collide(motion)
 			if Player.position.x > position.x:
 				velocity.x = abs(velocity.x)
@@ -35,12 +36,14 @@ func _physics_process(delta):
 				velocity.y = abs(velocity.y)*-1
 				$Sprite.flip_h = true
 		else:
+# warning-ignore:return_value_discarded
 			move_and_slide(velocity*speed)
 			if velocity.x > 0:
 				$Sprite.flip_h = false
 			elif velocity.x < 0:
 				$Sprite.flip_h = true
 	else:
+# warning-ignore:return_value_discarded
 		move_and_slide(velocity*speed)
 		if velocity.x > 0:
 			$Sprite.flip_h = false
@@ -59,4 +62,5 @@ func _on_Hitbox_body_entered(body):
 		velocity.x *= -1
 
 func knockback():
+# warning-ignore:return_value_discarded
 	move_and_slide(-velocity*speed*knockback_force)

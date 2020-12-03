@@ -1,6 +1,8 @@
 extends Node2D
 
 func _ready():
+# warning-ignore:return_value_discarded
+	$HUD/Fade/AnimationPlayer.play("Fade_Out")
 	$Player.connect("collision", self, "_on_Player_Collision")
 	GameEvents.current = GameEvents.max_amount
 	$HUD/Label.visible = false
@@ -45,6 +47,7 @@ func _on_Player_Collision(body):
 		$HUD/Label.visible = true
 		$Player/MainCamera/Sprite/Timer.start()
 	if body.name == "CorridorLimitOut":
+# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/Game_Over.tscn")
 
 func _on_MinduimJam_finished():

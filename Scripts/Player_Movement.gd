@@ -10,8 +10,8 @@ var bullet = preload("res://Scenes/Bullet.tscn")
 
 signal collision(body)
 
-func _physics_process(delta):
-	move(delta)
+func _physics_process(_delta):
+	move()
 	
 	if GameEvents.current_weapon != "Empty_Hand":
 		speed = slow_speed
@@ -53,7 +53,7 @@ func _physics_process(delta):
 	else:
 		speed = fast_speed
 
-func move(delta):
+func move():
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_right"):
 		$CollisionShape2D/Sprite.flip_h = false
@@ -65,6 +65,7 @@ func move(delta):
 		velocity.y = -7
 	if Input.is_action_pressed("ui_down"):
 		velocity.y = 7
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity*speed)	
 
 func shoot(note):

@@ -6,14 +6,18 @@ var displayed_enemy_dead = false
 var displayed_door = false
 
 func _ready():
+# warning-ignore:return_value_discarded
 	get_parent().get_parent().get_child(1).connect("collision", self, "_on_Player_Collision")
+# warning-ignore:return_value_discarded
 	get_parent().get_parent().get_child(3).get_child(0).connect("dead", self, "_on_Enemy_Dead")
+# warning-ignore:return_value_discarded
 	get_parent().get_parent().get_child(4).get_child(4).connect("player_in_area", self, "_on_Player_In_Area")
+# warning-ignore:return_value_discarded
 	get_parent().get_parent().get_child(4).get_child(5).connect("player_in_area", self, "_on_Player_In_Area")
 	$TutorialText.text = "HEY MINDUIM, WELCOME TO 'JUST A NOTE'. \n THERE IS MUCH TO EXPLAIN, BUT FOR NOW, \n LET'S JUST GET OUT OF HERE \n GO RIGHT =======>"
 	texts_displayed += 1
 
-func _process(delta):
+func _process(_delta):
 	if GameEvents.parchments_unlocked.size() > 0 and texts_displayed <= 2:
 		$TutorialText.text = "YOU FOUND YOUR FIRST PARCHMENT. WITH THIS, YOU NOW KNOW HOW TO ATTACK YOUR ENEMYS. \n EACH ENEMY HAS A NOTE. ALWAYS ATTACK ENEMYS WITH THE PREVIOUS NOTE ON THE PARCHMENT. \n IT WILL WORK, TRUST ME!"
 		texts_displayed += 1

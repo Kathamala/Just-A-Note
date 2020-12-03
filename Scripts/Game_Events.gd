@@ -31,13 +31,14 @@ func _ready():
 	#weapons_unlocked.append("Guitar")
 	
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("Change_Weapon"):
 		if weapons_unlocked.size() <= 1:
 			return
 		weapon_change()
 	
 	if current == 0:
+# warning-ignore:return_value_discarded
 		get_tree().reload_current_scene()
 			
 func weapon_change():

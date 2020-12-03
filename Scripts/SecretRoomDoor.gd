@@ -25,7 +25,7 @@ func _ready():
 	$ColorRect.rect_size.y = dynamic_font.size*1.25
 	$ColorRect/GuideText.add_font_override("font", dynamic_font)
 
-func _process(delta):
+func _process(_delta):
 	if open:
 		$Sprite.visible = false
 		$OpenSprite.visible = true
