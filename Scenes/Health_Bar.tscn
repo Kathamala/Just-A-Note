@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Sprites/Player/minduim idle.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/HUD/Hud.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Health_Bar.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Collectables/violao.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.847059, 0.235294, 0.117647, 1 )
@@ -27,8 +28,21 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "Empty_Hand",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Guitar",
+"speed": 5.0
+} ]
+
 [node name="ProgressBar" type="ProgressBar"]
-margin_right = 512.0
+margin_right = 363.0
 margin_bottom = 64.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
@@ -39,16 +53,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = -28.0616
-margin_top = -46.1837
-margin_right = 32.9384
-margin_bottom = 38.8163
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 112.574, 47.8863 )
 texture = ExtResource( 1 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Current_Weapon" type="AnimatedSprite" parent="."]
+position = Vector2( 13.9831, 100.641 )
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 3 )
+animation = "Guitar"

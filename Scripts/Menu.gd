@@ -1,6 +1,8 @@
 extends Control
 
 var selected = 1
+#1 para start
+#-1 para exit
 
 func _ready():
 	$Fade.visible = true
@@ -17,12 +19,14 @@ func _process(_delta):
 		selected *= -1
 
 	if selected > 0:
-		$MenuImage.animation = "Start"
+		$Start.animation = "Selected"
+		$Exit.animation = "Not"
 		if Input.is_action_just_pressed("ui_accept"):
 			$Fade/AnimationPlayer.play("Fade_In")
 			$Option_Select.play()
 	else:
-		$MenuImage.animation = "Exit"
+		$Exit.animation = "Selected"
+		$Start.animation = "Not"
 		if Input.is_action_just_pressed("ui_accept"):
 			get_tree().quit()
 
