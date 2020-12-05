@@ -1,6 +1,41 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Game_Over.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Menu/Game Over bg.png" type="Texture" id=2]
+[ext_resource path="res://Audio/Stage_Music/Game_Over.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/Sound_Effects/Option_Change.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/Sound_Effects/Option_Select.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Fade.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/Menu/Retry Button 1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Menu/Menu Button 1.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Menu/Menu Button 2.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Menu/Retry Button 2.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Selected",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Not",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "Selected",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Not",
+"speed": 5.0
+} ]
 
 [node name="GameOver" type="Control"]
 anchor_right = 1.0
@@ -10,19 +45,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Restart" type="Button" parent="."]
-margin_left = 224.0
-margin_top = 466.0
-margin_right = 930.0
-margin_bottom = 642.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Fade" parent="." instance=ExtResource( 6 )]
+modulate = Color( 0, 0, 0, 0.27451 )
+z_index = 3
+z_as_relative = false
 
-[node name="Menu" type="Button" parent="."]
-margin_left = 224.0
-margin_top = 740.0
-margin_right = 930.0
-margin_bottom = 916.0
-[connection signal="pressed" from="Restart" to="." method="_on_Restart_pressed"]
-[connection signal="pressed" from="Menu" to="." method="_on_Menu_pressed"]
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 540, 360 )
+texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.562, 0.664 )
+limit_left = 0
+limit_top = 0
+
+[node name="Game_Over_Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 5.0
+autoplay = true
+
+[node name="Option_Select" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Option_Change" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Menu" type="AnimatedSprite" parent="."]
+position = Vector2( 530, 554.496 )
+frames = SubResource( 1 )
+animation = "Not"
+
+[node name="Retry" type="AnimatedSprite" parent="."]
+position = Vector2( 530, 404.064 )
+frames = SubResource( 2 )
+animation = "Not"

@@ -14,6 +14,7 @@ func _physics_process(_delta):
 	move()
 	
 	if GameEvents.current_weapon != "Empty_Hand":
+		$Guitar.visible = true
 		speed = slow_speed
 		if Input.is_action_just_pressed("Shoot_A"):
 			if Input.is_action_pressed("Sharp_Note"):
@@ -52,14 +53,17 @@ func _physics_process(_delta):
 				shoot("G")
 	else:
 		speed = fast_speed
+		$Guitar.visible = false
 
 func move():
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_right"):
 		$CollisionShape2D/Sprite.flip_h = false
+		$Guitar.flip_h = false
 		velocity.x = 7
 	if Input.is_action_pressed("ui_left"):
 		$CollisionShape2D/Sprite.flip_h = true
+		$Guitar.flip_h = true
 		velocity.x = -7
 	if Input.is_action_pressed("ui_up"):
 		velocity.y = -7

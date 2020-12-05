@@ -2,10 +2,20 @@ extends Node2D
 
 func _ready():
 # warning-ignore:return_value_discarded
+	$HUD/Fade.visible = true
 	$HUD/Fade/AnimationPlayer.play("Fade_Out")
 	$Player.connect("collision", self, "_on_Player_Collision")
 	GameEvents.current = GameEvents.max_amount
 	$HUD/Label.visible = false
+	
+	#Reset variables
+	GameEvents.game_moment = 0
+	GameEvents.notes_unlocked = []
+	GameEvents.weapons_unlocked = ["Empty_Hand"]
+	GameEvents.parchments_unlocked = []
+	GameEvents.collectables_unlocked = []
+	GameEvents.current_weapon = "Empty_Hand"
+	GameEvents.current = GameEvents.max_amount
 
 func _on_Player_Collision(body):
 	if body.name == "Guitar":
@@ -48,7 +58,7 @@ func _on_Player_Collision(body):
 		$Player/MainCamera/Sprite/Timer.start()
 	if body.name == "CorridorLimitOut":
 # warning-ignore:return_value_discarded
-		get_tree().change_scene("res://Scenes/Game_Over.tscn")
+		get_tree().change_scene("res://Scenes/Menu.tscn")
 
 func _on_MinduimJam_finished():
 	$Player/MinduimJam.play()

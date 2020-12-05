@@ -39,7 +39,8 @@ func _process(_delta):
 	
 	if current == 0:
 # warning-ignore:return_value_discarded
-		get_tree().reload_current_scene()
+		current = max_amount
+		get_tree().change_scene("res://Scenes/Game_Over.tscn")
 			
 func weapon_change():
 	for i in range(0, weapons_unlocked.size()):		

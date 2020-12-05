@@ -124,13 +124,15 @@ func check_note_in_array(note):
 				just_changed = true
 				
 			else:
-				$ColorRect/GuideText.push_color(Color.yellow)
+				$ColorRect/GuideText.push_color(Color(0.82745, 0.59215, 0.31764))
 				
 				if word[i] == "#" and just_changed:
 					$ColorRect/GuideText.push_color(Color.blue)
 				just_changed = false
 				
 			$ColorRect/GuideText.add_text(word[i])
+	else:
+		reset_sequence()
 
 	if notes_right == sequence.size():
 		if !open:
@@ -138,6 +140,9 @@ func check_note_in_array(note):
 		open = true
 
 func _on_Timer_timeout():
+	reset_sequence()
+
+func reset_sequence():
 	#reset
 	if notes_right > 0:
 		notes_right = 0
@@ -147,6 +152,6 @@ func _on_Timer_timeout():
 		chars_changes = 0
 		var word = $ColorRect/GuideText.text
 		$ColorRect/GuideText.text = ""
-		$ColorRect/GuideText.push_color(Color.yellow)
+		$ColorRect/GuideText.push_color(Color(0.82745, 0.59215, 0.31764))
 		for i in range(word.length()):
-			$ColorRect/GuideText.add_text(word[i])	
+			$ColorRect/GuideText.add_text(word[i])

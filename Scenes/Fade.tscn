@@ -35,7 +35,6 @@ tracks/0/keys = {
 }
 
 [node name="Fade" type="Sprite"]
-visible = false
 modulate = Color( 0, 0, 0, 0.27451 )
 position = Vector2( 969.896, 539.391 )
 scale = Vector2( 1.65926, 1 )
