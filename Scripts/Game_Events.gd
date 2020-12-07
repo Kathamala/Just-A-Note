@@ -3,7 +3,7 @@ extends Node
 export var max_amount = 100
 onready var current = max_amount
 
-var current_parchment = "A"
+var current_parchment = ""
 var current_weapon = "Empty_Hand"
 
 var notes_unlocked = []

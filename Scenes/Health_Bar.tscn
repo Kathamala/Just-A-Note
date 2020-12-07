@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Sprites/HUD/Hud.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Health_Bar.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Collectables/violao.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Collectables/Pergaminho miniatura.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Collectables/la mano de dios.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.847059, 0.235294, 0.117647, 1 )
@@ -36,7 +37,7 @@ animations = [ {
 "name": "Guitar",
 "speed": 5.0
 }, {
-"frames": [  ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "Empty_Hand",
 "speed": 5.0

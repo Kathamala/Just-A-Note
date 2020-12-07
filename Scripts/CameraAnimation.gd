@@ -2,6 +2,7 @@ extends Camera2D
 
 func _ready():
 	$Sprite.visible = false
+	get_parent().get_parent().get_child(0).get_child(4).visible = false
 
 func _process(_delta):
 	if GameEvents.game_moment == 1:
@@ -12,3 +13,6 @@ func _process(_delta):
 		if int($Sprite/Timer.time_left) <= 0:
 # warning-ignore:return_value_discarded
 			get_tree().change_scene("res://Scenes/Game_Over.tscn")
+	
+	if GameEvents.current_parchment == "E":
+		get_parent().get_parent().get_child(0).get_child(4).visible = true

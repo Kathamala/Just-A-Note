@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=2]
+[gd_scene load_steps=109 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tilesets/tileset carpete 128px.png" type="Texture" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://Scenes/Fade.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Sprites/Collectables/Pergaminho miniatura.png" type="Texture" id=36]
 [ext_resource path="res://Sprites/Collectables/violao.png" type="Texture" id=37]
+[ext_resource path="res://Sprites/Collectables/Pergaminho.png" type="Texture" id=38]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -1470,11 +1471,16 @@ margin_top = 64.0
 margin_right = 532.0
 margin_bottom = 127.0
 
+[node name="Parchment" type="Sprite" parent="HUD"]
+visible = false
+position = Vector2( 344.719, 859.307 )
+texture = ExtResource( 38 )
+
 [node name="Player" parent="." groups=[
 "Player",
 ] instance=ExtResource( 1 )]
 position = Vector2( 682.363, 2483.02 )
-z_index = 1
+z_index = 2
 slow_speed = 50
 fast_speed = 100
 
@@ -1648,8 +1654,8 @@ position = Vector2( 5059.12, 5091.77 )
 enemy_note = "B"
 
 [node name="Enemy5" parent="Enemys" instance=ExtResource( 17 )]
-position = Vector2( 5172.87, 5497.33 )
-enemy_note = "D#"
+position = Vector2( 9910.67, 3642.17 )
+enemy_note = "B"
 
 [node name="Enemy6" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 7903.15, 5178.4 )
@@ -1679,8 +1685,16 @@ enemy_note = "D#"
 position = Vector2( 8575.9, 1757.35 )
 enemy_note = "B"
 
+[node name="Enemy17" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 9512.96, 499.931 )
+enemy_note = "B"
+
 [node name="Enemy13" parent="Enemys" instance=ExtResource( 17 )]
 position = Vector2( 9456.9, 1193.99 )
+enemy_note = "D#"
+
+[node name="Enemy18" parent="Enemys" instance=ExtResource( 17 )]
+position = Vector2( 10933.2, 804.217 )
 enemy_note = "D#"
 
 [node name="Enemy14" parent="Enemys" instance=ExtResource( 17 )]

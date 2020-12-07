@@ -8,14 +8,7 @@ func _ready():
 	GameEvents.current = GameEvents.max_amount
 	$HUD/Label.visible = false
 	
-	#Reset variables
-	GameEvents.game_moment = 0
-	GameEvents.notes_unlocked = []
-	GameEvents.weapons_unlocked = ["Empty_Hand"]
-	GameEvents.parchments_unlocked = []
-	GameEvents.collectables_unlocked = []
-	GameEvents.current_weapon = "Empty_Hand"
-	GameEvents.current = GameEvents.max_amount
+	reset_variables()
 
 func _on_Player_Collision(body):
 	if body.name == "Guitar":
@@ -24,6 +17,7 @@ func _on_Player_Collision(body):
 		GameEvents.current_weapon = "Guitar"
 	if body.name == "ScaleParchment_E":
 		GameEvents.parchments_unlocked.append("E")
+		GameEvents.current_parchment = "E"
 		body.queue_free()
 	if body.name == "Note_A":
 		GameEvents.notes_unlocked.append("A")
@@ -62,3 +56,13 @@ func _on_Player_Collision(body):
 
 func _on_MinduimJam_finished():
 	$Player/MinduimJam.play()
+
+func reset_variables():
+	GameEvents.game_moment = 0
+	GameEvents.notes_unlocked = []
+	GameEvents.weapons_unlocked = ["Empty_Hand"]
+	GameEvents.parchments_unlocked = []
+	GameEvents.collectables_unlocked = []
+	GameEvents.current_weapon = "Empty_Hand"
+	GameEvents.current_parchment = ""
+	GameEvents.current = GameEvents.max_amount

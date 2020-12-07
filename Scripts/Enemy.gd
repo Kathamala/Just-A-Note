@@ -49,6 +49,11 @@ func _physics_process(_delta):
 			$Sprite.flip_h = false
 		elif velocity.x < 0:
 			$Sprite.flip_h = true
+	
+	if velocity != Vector2(0, 0):
+		$Sprite.play("Walking")
+	else:
+		$Sprite.play("Idle")
 
 func _on_Hitbox_body_entered(body):
 	if "Bullet" in body.name:

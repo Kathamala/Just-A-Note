@@ -34,14 +34,14 @@ func _process(_delta):
 			$Fade/AnimationPlayer.play("Fade_In")
 			$Option_Select.play()
 
-func _on_Menu_Music_finished():
-	$Game_Over_Music.play()
-
 func on_Fade_Out_Finished(name):
 	if name == "Fade_In":
 # warning-ignore:return_value_discarded
 		if selected == 1:
 			get_tree().change_scene("res://Scenes/Game.tscn")
 		else:
+# warning-ignore:return_value_discarded
 			get_tree().change_scene("res://Scenes/Menu.tscn")
 
+func _on_Game_Over_Music_finished():
+	$Game_Over_Music.play()

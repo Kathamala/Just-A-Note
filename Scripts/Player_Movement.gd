@@ -72,6 +72,11 @@ func move():
 # warning-ignore:return_value_discarded
 	move_and_slide(velocity*speed)	
 
+	if velocity != Vector2(0, 0):
+		$CollisionShape2D/Sprite.play("Walking")
+	else:
+		$CollisionShape2D/Sprite.play("Idle")
+		
 func shoot(note):
 	#check bullet count
 	if GameEvents.bullet_count > GameEvents.max_bullet_count:
