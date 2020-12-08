@@ -1728,7 +1728,7 @@ sequence = [ "C", "A#", "C", "C#" ]
 
 [node name="SecretRoomDoor2" parent="Doors" instance=ExtResource( 28 )]
 position = Vector2( 6591.38, 2368.24 )
-z_index = 1
+z_index = 2
 sequence = [ "C#", "C", "C", "A", "A#" ]
 
 [node name="Collectables" type="Node" parent="."]
