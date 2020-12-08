@@ -13,27 +13,27 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "Selected",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "Not",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Selected",
 "speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "Selected",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "Not",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "Selected",
 "speed": 5.0
 } ]
 
@@ -59,7 +59,7 @@ zoom = Vector2( 0.562, 0.664 )
 limit_left = 0
 limit_top = 0
 
-[node name="Game_Over_Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Game_Over_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = 7.0
 autoplay = true

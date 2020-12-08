@@ -47,9 +47,10 @@ func _on_Player_Collision(body):
 		GameEvents.current -= 10
 		body.get_parent().knockback()
 	if body.name == "CorridorLimitIn":
-		GameEvents.game_moment = 1
-		$HUD/Label.visible = true
-		$Player/MainCamera/Sprite/Timer.start()
+		if GameEvents.game_moment == 0:
+			GameEvents.game_moment = 1
+			$HUD/Label.visible = true
+			$Player/MainCamera/Sprite/Timer.start()
 	if body.name == "CorridorLimitOut":
 # warning-ignore:return_value_discarded
 		get_tree().change_scene("res://Scenes/Menu.tscn")
